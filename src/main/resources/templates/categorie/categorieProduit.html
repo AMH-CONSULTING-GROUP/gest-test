@@ -1,0 +1,59 @@
+<div th:replace="layouts/header :: header"></div>
+
+<div class="page-wrapper">
+	<div class="content container-fluid">
+
+		<div class="page-header">
+			<div class="page-title">
+				<h4>Catégories des produits</h4>
+				<h6>Liste</h6>
+			</div>
+			<div class="page-btn">
+				<a th:href="@{/view/categorieProduit/add}" class="btn btn-added"><img
+					th:src="@{/img/icons/plus.svg}" class="me-2" alt="img">Ajouter</a>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table  datanew ">
+								<thead>
+									<tr>
+										<th>Position</th>
+										<th>Libelle</th>
+										<th>Date Creation</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- 									<tr th:if="${listeCat.empty}"> -->
+									<!-- 										<td colspan="9">Aucune depense disponible actuellement -->
+									<!-- 											...</td> -->
+									<!-- 									</tr> -->
+									<tr th:each="d,i : ${listeCat}">
+										<td><span th:text="${i.count}"> 1 </span></td>
+										<td><span th:text="${d.libelle}"> </span></td>
+										<td><span
+											th:text="${#temporals.format(d.createAt, 'dd-MM-yyyy HH:mm')}">
+										</span></td>
+										
+										<td><a th:href="@{'print_piece_caise/'+${d.id}}"><i
+												class="fa fa-trash"></i></a></td>
+										<td><a th:href="@{'print_piece_caise/'+${d.id}}"><i
+												class="fa fa-edit"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer part -->
+	<div th:replace="layouts/footer :: footer"></div>

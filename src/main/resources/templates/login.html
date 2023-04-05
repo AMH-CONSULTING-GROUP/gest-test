@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Login</title>
+
+
+<link rel="shortcut icon" type="image/x-icon"
+	th:href="@{/img/favicon1.png}" />
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	th:href="@{/plugins/fontawesome/css/fontawesome.min.css}" />
+<link rel="stylesheet" th:href="@{/plugins/fontawesome/css/all.min.css}" />
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body class="account-page">
+
+	<div class="main-wrapper">
+		<div class="account-content">
+			<div class="login-wrapper">
+				<div class="login-content">
+					<div class="login-userset">
+						<div class="login-logo">
+							<img th:src="@{/img/logo.jpg}" alt="img">
+						</div>
+						<div class="login-userheading">
+							<h4>Please login to your account</h4>
+						</div>
+						<form th:action="@{/login}" method=post>
+							<div class="form-login">
+								<label>Username</label>
+								<div class="form-addons">
+									<input type="text" placeholder="Entrer votre username"
+										name="username"> <img th:src="@{/img/icons/mail.svg}"
+										alt="img">
+								</div>
+							</div>
+							<div class="form-login">
+								<label>Password</label>
+								<div class="pass-group">
+									<input type="password" class="pass-input"
+										placeholder="Entrer votre mot de passe" name="password">
+									<span class="fas toggle-password fa-eye-slash"></span>
+								</div>
+							</div>
+							<div class="form-login">
+								<div class="alreadyuser">
+									<h4>
+										<a href="forgetpassword.html" class="hover-a">Forgot
+											Password?</a>
+									</h4>
+								</div>
+							</div>
+							<div class="form-login">
+<!-- 								<a class="btn btn-login" href="index.html">Sign In</a> -->
+								<button type="submit" class="btn btn-login">Se connecter</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="login-img">
+					<img th:src="@{/img/login.jpg}" alt="img">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+
+	<script th:src="@{/js/feather.min.js}"></script>
+
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+	<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
