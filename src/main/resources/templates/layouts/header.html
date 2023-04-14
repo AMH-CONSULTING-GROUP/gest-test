@@ -80,23 +80,6 @@
 				</li>
 
 
-				<li class="nav-item dropdown has-arrow flag-nav"><a
-					class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-					href="javascript:void(0);" role="button"> <img
-						th:src="@{/img/flags/us1.png}" alt="" height="20">
-				</a>
-					<div class="dropdown-menu dropdown-menu-right">
-						<a href="javascript:void(0);" class="dropdown-item"> <img
-							th:src="@{/img/flags/us.png}" alt="" height="16"> English
-						</a> <a href="javascript:void(0);" class="dropdown-item"> <img
-							th:src="@{/img/flags/fr.png}" alt="" height="16"> French
-						</a> <a href="javascript:void(0);" class="dropdown-item"> <img
-							th:src="@{/img/flags/es.png}" alt="" height="16"> Spanish
-						</a> <a href="javascript:void(0);" class="dropdown-item"> <img
-							th:src="@{/img/flags/de.png}" alt="" height="16"> German
-						</a>
-					</div></li>
-
 
 				<li class="nav-item dropdown"><a href="javascript:void(0);"
 					class="dropdown-toggle nav-link" data-bs-toggle="dropdown"> <img
@@ -122,58 +105,6 @@
 												</p>
 												<p class="noti-time">
 													<span class="notification-time">4 mins ago</span>
-												</p>
-											</div>
-										</div>
-								</a></li>
-								<li class="notification-message"><a href="activities.html">
-										<div class="media d-flex">
-											<span class="avatar flex-shrink-0"> <img alt=""
-												th:src="@{/img/profiles/avatar-03.jpg}">
-											</span>
-											<div class="media-body flex-grow-1">
-												<p class="noti-details">
-													<span class="noti-title">Tarah Shropshire</span> changed
-													the task name <span class="noti-title">Appointment
-														booking with payment gateway</span>
-												</p>
-												<p class="noti-time">
-													<span class="notification-time">6 mins ago</span>
-												</p>
-											</div>
-										</div>
-								</a></li>
-								<li class="notification-message"><a href="activities.html">
-										<div class="media d-flex">
-											<span class="avatar flex-shrink-0"> <img alt=""
-												th:src="@{/img/profiles/avatar-06.jpg}">
-											</span>
-											<div class="media-body flex-grow-1">
-												<p class="noti-details">
-													<span class="noti-title">Misty Tison</span> added <span
-														class="noti-title">Domenic Houston</span> and <span
-														class="noti-title">Claire Mapes</span> to project <span
-														class="noti-title">Doctor available module</span>
-												</p>
-												<p class="noti-time">
-													<span class="notification-time">8 mins ago</span>
-												</p>
-											</div>
-										</div>
-								</a></li>
-								<li class="notification-message"><a href="activities.html">
-										<div class="media d-flex">
-											<span class="avatar flex-shrink-0"> <img alt=""
-												th:src="@{/img/profiles/avatar-17.jpg}">
-											</span>
-											<div class="media-body flex-grow-1">
-												<p class="noti-details">
-													<span class="noti-title">Rolland Webber</span> completed
-													task <span class="noti-title">Patient and Doctor
-														video conferencing</span>
-												</p>
-												<p class="noti-time">
-													<span class="notification-time">12 mins ago</span>
 												</p>
 											</div>
 										</div>
@@ -214,18 +145,19 @@
 									th:src="@{/img/profiles/avator1.jpg}" alt=""> <span
 									class="status online"></span></span>
 								<div class="profilesets">
-									<h6>John Doe</h6>
-									<h5>Admin</h5>
+									<h6>
+										<span sec:authentication="name"></span>
+									</h6>
+									<h5 sec:authentication="principal.authorities"></h5>
 								</div>
 							</div>
 							<hr class="m-0">
 							<a class="dropdown-item" href="profile.html"> <i class="me-2"
 								data-feather="user"></i> My Profile
-							</a> <a class="dropdown-item" href="generalsettings.html"><i
-								class="me-2" data-feather="settings"></i>Settings</a>
+							</a>
 							<hr class="m-0">
-							<a class="dropdown-item logout pb-0" href="signin.html"><img
-								th:src="@{/img/icons/log-out.svg}" class="me-2" alt="img">Logout</a>
+							<a class="dropdown-item logout pb-0" th:href="@{/logout}"><img
+								th:src="@{/img/icons/log-out.svg}" class="me-2" alt="img">Deconnexion</a>
 						</div>
 					</div></li>
 			</ul>
@@ -249,54 +181,35 @@
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
 					<ul>
-						<li class="active"><a href="index.html"><img
-								th:href="@{/}" alt="img"><span> Dashboard</span> </a></li>
+						<li class="active"><a th:href="@{/}"><img alt="img"><span>
+									Dashboard</span> </a></li>
 						<li class="submenu"><a href="javascript:void(0);"><img
 								th:src="@{/img/icons/product.svg}" alt="img"><span>
 									Produit</span> <span class="menu-arrow"></span></a>
 							<ul>
-								<li><a href="productlist.html">Ajouter</a></li>
-								<li><a href="addproduct.html">Liste</a></li>
-								<li><a href="importproduct.html">Import Produits</a></li>
+								<li><a th:href="@{/produit/list}">Liste</a></li>
+								<li
+									sec:authorize="hasAnyAuthority('ADMIN', 'ENSEIGNANT', 'GEST_STOCK')"><a
+									th:href="@{/stock/produit/historique-entree}">Journal des
+										entrées</a></li>
+								<li><a th:href="@{/stock/produit/historique-sortie}">Journal
+										des sorties</a></li>
 							</ul></li>
-						<li class="submenu"><a href="javascript:void(0);"><img
-								th:src="@{/img/icons/sales1.svg}" alt="img"><span>
-									Matériels</span> <span class="menu-arrow"></span></a>
-							<ul>
-								<li><a href="saleslist.html">Matériels</a></li>
-								<li><a href="pos.html">Ajouter</a></li>
-								<li><a href="pos.html">Liste</a></li>
-								<li><a href="salesreturnlists.html">Historique
-										modifications</a></li>
-							</ul></li>
-						<li class="submenu"><a href="javascript:void(0);"><img
-								th:src="@{/img/icons/purchase1.svg}" alt="img"><span>
-									Purchase</span> <span class="menu-arrow"></span></a>
-							<ul>
-								<li><a href="purchaselist.html">Purchase List</a></li>
-								<li><a href="addpurchase.html">Add Purchase</a></li>
-								<li><a href="importpurchase.html">Import Purchase</a></li>
-							</ul></li>
-						</li>
-						<li class="submenu"><a href="javascript:void(0);"><img
-								th:src="@{/img/icons/users1.svg}" alt="img"><span>
-									Utilisateurs</span> <span class="menu-arrow"></span></a>
-							<ul>
-								<li><a th:href="@{/utilisateur/list}">Liste</a></li>
-								<li><a href="addcustomer.html">Ajouter </a></li>
-								<li><a href="supplierlist.html">Administrateur</a></li>
-							</ul></li>
-						<li><a href="components.html"><i data-feather="layers"></i><span>
-									Components</span> </a></li>
 						<li class="submenu"><a href="javascript:void(0);"><i
-								data-feather="box"></i> <span>Cours </span> <span
+								class="fa fa-columns"></i><span> Matériels</span> <span
 								class="menu-arrow"></span></a>
 							<ul>
-								<li><a href="sweetalerts.html">Ajouter</a></li>
-								<li><a href="tooltip.html">Liste</a></li>
+								<li><a href="#" class="type-perso">Liste</a></li>
+								<li><a href="#" class="type-perso">Journal des entrées</a></li>
+								<li><a href="#" class="type-perso">Journal des sorties</a></li>
 							</ul></li>
-						<li class="submenu"><a href="javascript:void(0);"><i
-								data-feather="columns"></i> <span> Paramètres </span> <span
+						<li sec:authorize="hasAnyAuthority('ADMIN', 'GEST_STOCK')"><a
+							th:href="@{/utilisateur/list}"> <i class="fa fa-users"></i> <span>Utilisateurs</span></a></li>
+						<li><a href="#" class="type-perso"> <i
+								class="fa fa-clipboard"></i> <span>Cours</span></a></li>
+						<li class="submenu"><a href="javascript:void(0);"
+							sec:authorize="hasAnyAuthority('ADMIN', 'ENSEIGNANT', 'GEST_STOCK')"><i
+								class="fa fa-cog"></i> <span> Paramètres </span> <span
 								class="menu-arrow"></span></a>
 							<ul>
 								<li><a th:href="@{/categorieProduit/list}">Categorie

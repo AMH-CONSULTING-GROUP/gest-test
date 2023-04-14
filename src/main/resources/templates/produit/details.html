@@ -1,0 +1,113 @@
+<div th:replace="layouts/header :: header"></div>
+
+<div class="page-wrapper">
+	<div class="content">
+		<div class="page-header">
+			<div class="page-title">
+				<a  class="btn btn-rounded btn-outline-dark" th:href="@{/produit/list}">Retour à la liste</a> 
+				<br/>
+				<h4>Details du produit</h4>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-8 col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="bar-code-view">
+							<img th:src="@{'/img/barcode1.png'}" alt="barcode"> <a
+								class="printimg"> <img th:src="@{'/img/icons/printer.svg'}"
+								alt="print">
+							</a>
+						</div>
+						<div class="productdetails">
+							<ul class="product-bar">
+								<li>
+									<h4>Nom</h4>
+									<h6>
+										<span th:text="${produit.name}"> </span>
+									</h6>
+								</li>
+								<li>
+									<h4>Description</h4>
+									<h6>
+										<span th:text="${produit.description}"> </span>
+									</h6>
+								</li>
+								<li>
+									<h4>Seuil minimal</h4>
+									<h6>
+										<span th:text="${produit.minQuantite}+' '+${produit.unite}"> </span>
+									</h6>
+								</li>
+								<li>
+									<h4>Quantité</h4>
+									<h6>
+										<span th:text="${produit.quantite}+' '+${produit.unite}"> </span>
+									</h6>
+								</li>
+								<li>
+									<h4>Type</h4>
+									<h6>
+										<span th:text="${produit.type}"> </span>
+									</h6>
+								</li>
+								<li>
+									<h4>Inflammable</h4>
+									<h6>
+										<span th:text="${produit.inflammable}"> </span>
+									</h6>
+								</li>
+								<li>
+									<h4>Date Creation</h4>
+									<h6>
+										<span
+											th:text="${#temporals.format(produit.createAt, 'dd-MM-yyyy HH:mm')}">
+										</span>
+									</h6>
+								</li>
+								<li>
+									<h4>Date d'Expiration</h4>
+									<h6>
+										<span
+											th:text="${#temporals.format(produit.expireAt, 'dd-MM-yyyy HH:mm')}">
+										</span>
+									</h6>
+								</li>
+								<li>
+									<h4>Créer par</h4>
+									<h6>
+										<span th:text="${produit.createBy.fullName}"> </span>
+									</h6>
+								</li>
+								<li>
+									<h4>Description</h4>
+									<h6>
+										<span th:text="${produit.description}"> </span>
+									</h6>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="slider-product-details">
+							<div class="owl-carousel owl-theme product-slide">
+								<div class="slider-product">
+									<img th:src="@{'/img/uploads/'+${produit.photo}}" alt="img">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- footer part -->
+<div th:replace="layouts/footer :: footer"></div>
