@@ -6,7 +6,7 @@
 
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Produits</h4>
+				<h4>Matériel</h4>
 				<h6>Liste</h6>
 			</div>
 			<div class="page-btn"
@@ -15,7 +15,7 @@
 				<!-- 					th:src="@{/img/icons/plus.svg}" class="me-2" alt="img">Ajouter</a> -->
 				<a href="javascript:void(0);" class="btn btn-adds"
 					data-bs-toggle="modal" data-bs-target="#create"><i
-					class="fa fa-plus me-2"></i>Ajouter Produit</a>
+					class="fa fa-plus me-2"></i>Ajouter Materiel</a>
 			</div>
 		</div>
 
@@ -29,7 +29,6 @@
 									<tr>
 										<th></th>
 										<th>Name</th>
-										<th>Type</th>
 										<th>Quantité</th>
 										<th>Date Creation</th>
 										<th></th>
@@ -40,30 +39,24 @@
 									<!-- 										<td colspan="9">Aucune depense disponible actuellement -->
 									<!-- 											...</td> -->
 									<!-- 									</tr> -->
-									<tr th:each="d,i : ${produitList}">
+									<tr th:each="d,i : ${materielList}">
 										<td><span th:text="${i.count}"> 1 </span></td>
-										<!-- 										<td class="productimgname"><a href="javascript:void(0);" -->
-										<!-- 											class="product-img"> <img -->
-										<!-- 												src="assets/img/product/product1.jpg" alt="product"> -->
-										<!-- 										</a> <a href="javascript:void(0);">Macbook pro</a></td> -->
 										<td class="productimgname"><a href="javascript:void(0);"
 											class="product-img"> <img
 												th:src="@{'/img/uploads/'+${d.photo}}">
 										</a><span th:text="${d.name}"> </span></td>
-										<td><span th:text="${d.type}"> </span></td>
-										<td><span th:text="${d.quantite}+' '+${d.unite}">
-										</span></td>
+										<td><span th:text="${d.quantite}"> </span></td>
 										<td><span
 											th:text="${#temporals.format(d.createAt, 'dd-MM-yyyy HH:mm')}">
 										</span></td>
 
 										<td><a class="me-3"
-											th:href="@{'/produit/details/'+${d.id}}"> <img
+											th:href="@{'/materiel/details/'+${d.id}}"> <img
 												th:src="@{'/img/icons/eye.svg'}" alt="details">
-										</a> <a class="me-3" th:href="@{'/produit/delete/'+${d.id}}"
+										</a> <a class="me-3" th:href="@{'/materiel/delete/'+${d.id}}"
 											sec:authorize="hasAnyAuthority('ADMIN', 'ENSEIGNANT', 'GEST_STOCK')">
 												<img th:src="@{'/img/icons/edit.svg'}" alt="edit">
-										</a> <a th:href="@{'/produit/delete/'+${d.id}}"
+										</a> <a th:href="@{'/materiel/delete/'+${d.id}}"
 											sec:authorize="hasAnyAuthority('ADMIN', 'ENSEIGNANT', 'GEST_STOCK')">
 												<img th:src="@{'/img/icons/delete.svg'}" alt="delete">
 										</a></td>
@@ -84,19 +77,19 @@
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Creation d'un produit</h5>
+					<h5 class="modal-title">Creation d'un Matériel</h5>
 					<button type="button" class="close" data-bs-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form role="form" method="post" th:action="@{/produit/add}"
-						th:object="${produit}" enctype="multipart/form-data">
+					<form role="form" method="post" th:action="@{/materiel/add}"
+						th:object="${materiel}" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-lg-6 col-sm-12 col-12">
 								<div class="form-group">
-									<label>Nom du produit</label> <input type="text"
+									<label>Nom du materiel</label> <input type="text"
 										th:field="*{name}">
 								</div>
 							</div>
@@ -116,26 +109,6 @@
 								<div class="form-group">
 									<label>Seuil minimal</label> <input type="text"
 										th:field="*{minQuantite}">
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-12 col-12">
-								<div class="form-group">
-									<label>Unite</label> <select
-										class="select select2-hidden-accessible" type="text"
-										th:field="*{unite}">
-										<option th:value="g" th:text="${'gramme'}"></option>
-										<option th:value="l" th:text="${'littre'}"></option>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-12 col-12">
-								<div class="form-group">
-									<label>Type</label> <select
-										class="select select2-hidden-accessible" type="text"
-										th:field="*{type}">
-										<option th:value="liquide" th:text="${'liquide'}"></option>
-										<option th:value="solide" th:text="${'solide'}"></option>
-									</select>
 								</div>
 							</div>
 
@@ -159,25 +132,6 @@
 								</div>
 							</div>
 
-							<div class="col-lg-6 col-sm-12 col-12">
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label">Inflammable?</label>
-									<div class="col-lg-9">
-										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio"
-												name="inflammable" id="gender_male" value="true" checked=""
-												th:field="*{inflammable}"> <label
-												class="form-check-label" for="gender_male"> Oui </label>
-										</div>
-										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio"
-												name="inflammable" id="gender_female" value="false"
-												th:field="*{inflammable}"> <label
-												class="form-check-label" for="gender_female"> Non </label>
-										</div>
-									</div>
-								</div>
-							</div>
 
 							<div class="col-lg-6 col-sm-12 col-12">
 								<div class="form-group">

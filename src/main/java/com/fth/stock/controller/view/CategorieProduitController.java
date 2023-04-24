@@ -23,6 +23,7 @@ public class CategorieProduitController {
 	public String viewCategorieAdd(Model model) {
 		CategorieProduit categorie = new CategorieProduit();
 		model.addAttribute("categorie", categorie);
+		model.addAttribute("link", "produit-cat");
 		return "categorie/categorieProduitAdd";
 	}
 
@@ -36,6 +37,7 @@ public class CategorieProduitController {
 	public String viewCategorieProduitList(Model model) {
 		List<CategorieProduit> liste = categorieProduitService.getAll();
 		model.addAttribute("listeCat", liste);
+		model.addAttribute("link", "produit-cat");
 		return "categorie/categorieProduit";
 	}
 

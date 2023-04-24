@@ -1,11 +1,12 @@
 <div th:replace="layouts/header :: header"></div>
+<meta charset="UTF-8">
 
 <div class="page-wrapper">
 	<div class="content container-fluid">
 
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Historique Des Entrées Des Produits</h4>
+				<h4>Historique Des EntrÃ©es Des Produits</h4>
 				<h6>Historique</h6>
 			</div>
 			<div class="page-btn">
@@ -13,7 +14,7 @@
 				<!-- 					th:src="@{/img/icons/plus.svg}" class="me-2" alt="img">Ajouter</a> -->
 				<a href="javascript:void(0);" class="btn btn-adds"
 					data-bs-toggle="modal" data-bs-target="#create"><i
-					class="fa fa-plus me-2"></i>Enregistrer une entrée</a>
+					class="fa fa-plus me-2"></i>Enregistrer une entrÃ©e</a>
 			</div>
 		</div>
 
@@ -72,10 +73,10 @@
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Enregistrement d'une entrée de produit</h5>
+					<h5 class="modal-title">Enregistrement d'une entrÃ©e de produit</h5>
 					<button type="button" class="close" data-bs-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">Ã—</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -95,7 +96,7 @@
 
 							<div class="col-lg-6 col-sm-12 col-12">
 								<div class="form-group">
-									<label>Quantité</label> <input type="text"
+									<label>QuantitÃ©</label> <input type="text"
 										th:field="*{quantite}">
 								</div>
 							</div>

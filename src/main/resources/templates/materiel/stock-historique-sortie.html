@@ -6,11 +6,11 @@
 
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Historique Des Sorties Des Produit</h4>
+				<h4>Historique Des Sorties Des Materiel</h4>
 				<h6>Historique</h6>
 			</div>
 			<div class="page-btn">
-				<!-- 				<a th:href="@{/view/categorieProduit/add}" class="btn btn-added"><img -->
+				<!-- 				<a th:href="@{/view/categorieMateriel/add}" class="btn btn-added"><img -->
 				<!-- 					th:src="@{/img/icons/plus.svg}" class="me-2" alt="img">Ajouter</a> -->
 				<a href="javascript:void(0);" class="btn btn-adds"
 					data-bs-toggle="modal" data-bs-target="#create"><i
@@ -27,10 +27,11 @@
 								<thead>
 									<tr>
 										<th></th>
-										<th>Produit</th>
+										<th>Materiel</th>
 										<th>Quantite</th>
 										<th>Date</th>
 										<th>Utilisateur</th>
+										<th>Rendu ?</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -38,24 +39,29 @@
 									<!-- 										<td colspan="9">Aucune depense disponible actuellement -->
 									<!-- 											...</td> -->
 									<!-- 									</tr> -->
-									<tr th:each="d,i : ${mProduits}">
+									<tr th:each="d,i : ${mMateriels}">
 										<td><span th:text="${i.count}"> 1 </span></td>
 										<!-- 										<td class="productimgname"><a href="javascript:void(0);" -->
 										<!-- 											class="product-img"> <img -->
 										<!-- 												src="assets/img/product/product1.jpg" alt="product"> -->
 										<!-- 										</a> <a href="javascript:void(0);">Macbook pro</a></td> -->
 										<td class="productimgname"><a
-											th:href="@{'/produit/details/'+${d.produit.id}}"
+											th:href="@{'/materiel/details/'+${d.materiel.id}}"
 											class="product-img"> <img
-												th:src="@{'/img/uploads/'+${d.produit.photo}}">
-										</a><span th:text="${d.produit.name}"> </span></td>
-										<td><span th:text="${d.quantite}+' '+${d.produit.unite}">
-										</span></td>
+												th:src="@{'/img/uploads/'+${d.materiel.photo}}">
+										</a><span th:text="${d.materiel.name}"> </span></td>
+										<td><span th:text="${d.quantite}"> </span></td>
 										<td><span
 											th:text="${#temporals.format(d.createAt, 'dd-MM-yyyy HH:mm')}">
 										</span></td>
 										<td><span th:text="${d.user.fullName}"> </span></td>
-
+										<td th:switch="${d.returned}"><span th:case="true"
+											class="text-success" th:text="OUI"></span>
+											<div th:case="false" class="d-flex flex-row">
+												<span class="text-danger">NON</span> <a
+													th:href="@{'/materiel/rendre/'+${d.id}}"
+													class="btn btn-warning p-2"> Rendre</a>
+											</div></td>
 									</tr>
 								</tbody>
 							</table>
@@ -73,7 +79,8 @@
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Enregistrement d'une sortie de produit</h5>
+					<h5 class="modal-title">Enregistrement d'une sortie de
+						materiel</h5>
 					<button type="button" class="close" data-bs-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
@@ -81,14 +88,14 @@
 				</div>
 				<div class="modal-body">
 					<form role="form" method="post"
-						th:action="@{/stock/produit/sortie}" th:object="${dto}">
+						th:action="@{/stock/materiel/sortie}" th:object="${dto}">
 						<div class="row">
 							<div class="col-lg-6 col-sm-12 col-12">
 								<div class="form-group">
-									<label>Produit</label> <select type="text"
+									<label>Materiel</label> <select type="text"
 										class="select select2-hidden-accessible"
-										th:field="*{produitId}">
-										<option th:each="val : ${produits}" th:value="${val.id}"
+										th:field="*{materielId}">
+										<option th:each="val : ${materiels}" th:value="${val.id}"
 											th:text="${val.name}"></option>
 									</select>
 								</div>

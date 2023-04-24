@@ -61,6 +61,7 @@ public class UtilisateurController {
 		model.addAttribute("user", user);
 		model.addAttribute("listeUtil", liste);
 		model.addAttribute("listeRoles", listeRoles);
+		model.addAttribute("link", "utilisateur");
 		return "utilisateur/utilisateur";
 	}
 

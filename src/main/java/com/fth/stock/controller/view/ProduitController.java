@@ -85,6 +85,7 @@ public class ProduitController {
 		model.addAttribute("produit", produit);
 		model.addAttribute("produitList", liste);
 		model.addAttribute("categories", categories);
+		model.addAttribute("link", "produit-list");
 		return "produit/list";
 	}
 
@@ -92,6 +93,7 @@ public class ProduitController {
 	public String viewProduitDetails(Model model, @PathVariable long id) {
 		Produit produit = produitService.getById(id);
 		model.addAttribute("produit", produit);
+		model.addAttribute("link", "produit-list");
 		return "produit/details";
 	}
 

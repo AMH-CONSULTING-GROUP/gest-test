@@ -54,6 +54,7 @@ public class MouvementProduitController {
 		model.addAttribute("mProduits", liste);
 		model.addAttribute("users", users);
 		model.addAttribute("produits", produits);
+		model.addAttribute("link", "mv-produit-entree");
 		return "produit/stock-historique-entree";
 	}
 
@@ -68,6 +69,7 @@ public class MouvementProduitController {
 		model.addAttribute("mProduits", liste);
 		model.addAttribute("users", users);
 		model.addAttribute("produits", produits);
+		model.addAttribute("link", "mv-produit-sortie");
 		return "produit/stock-historique-sortie";
 	}
 

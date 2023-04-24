@@ -31,6 +31,7 @@ public class AuthentificationController {
 		model.addAttribute("expiredP", expiredP);
 		model.addAttribute("lastP", lastP);
 		model.addAttribute("mProduits", mProduits);
+		model.addAttribute("link", "dashboard");
 		return "index";
 	}
 

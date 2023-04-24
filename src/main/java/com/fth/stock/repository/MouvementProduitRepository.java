@@ -19,7 +19,7 @@ public interface MouvementProduitRepository extends CrudRepository<MouvementProd
 	@Query("SELECT mp FROM MouvementProduit mp where mp.user.id =:userId ")
 	public List<MouvementProduit> getUserMouvementProduit(@Param("userId") long id);
 
-	@Query("SELECT mp FROM MouvementProduit mp where mp.user.id =:produitId ")
+	@Query("SELECT mp FROM MouvementProduit mp where mp.id =:produitId ")
 	public List<MouvementProduit> getProduitMouvement(@Param("produitId") long id);
 
 }

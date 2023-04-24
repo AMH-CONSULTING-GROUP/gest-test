@@ -181,38 +181,48 @@
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
 					<ul>
-						<li class="active"><a th:href="@{/}"><img alt="img"><span>
-									Dashboard</span> </a></li>
+						<li><a th:href="@{/}"
+							th:attr="class=${link == 'dashboard' ? 'active' : ''}"><img
+								alt="img"><span> Dashboard</span> </a></li>
 						<li class="submenu"><a href="javascript:void(0);"><img
 								th:src="@{/img/icons/product.svg}" alt="img"><span>
 									Produit</span> <span class="menu-arrow"></span></a>
 							<ul>
-								<li><a th:href="@{/produit/list}">Liste</a></li>
+								<li><a th:href="@{/produit/list}"
+									th:attr="class=${link == 'produit-list' ? 'active' : ''}">Liste</a></li>
 								<li
 									sec:authorize="hasAnyAuthority('ADMIN', 'ENSEIGNANT', 'GEST_STOCK')"><a
-									th:href="@{/stock/produit/historique-entree}">Journal des
-										entrées</a></li>
-								<li><a th:href="@{/stock/produit/historique-sortie}">Journal
+									th:href="@{/stock/produit/historique-entree}"
+									th:attr="class=${link == 'mv-produit-entree' ? 'active' : ''}">Journal
+										des entrées</a></li>
+								<li><a th:href="@{/stock/produit/historique-sortie}"
+									th:attr="class=${link == 'mv-produit-sortie' ? 'active' : ''}">Journal
 										des sorties</a></li>
 							</ul></li>
 						<li class="submenu"><a href="javascript:void(0);"><i
 								class="fa fa-columns"></i><span> Matériels</span> <span
 								class="menu-arrow"></span></a>
 							<ul>
-								<li><a href="#" class="type-perso">Liste</a></li>
-								<li><a href="#" class="type-perso">Journal des entrées</a></li>
-								<li><a href="#" class="type-perso">Journal des sorties</a></li>
+								<li><a th:href="@{/materiel/list}"
+									th:attr="class=${link == 'materiel-list' ? 'active' : ''}">Liste</a></li>
+								<li><a th:href="@{/stock/materiel/historique-entree}"
+									th:attr="class=${link == 'mv-materiel-entree' ? 'active' : ''}">Journal
+										des entrées</a></li>
+								<li><a th:href="@{/stock/materiel/historique-sortie}"
+									th:attr="class=${link == 'mv-materiel-sortie' ? 'active' : ''}">Journal
+										des sorties</a></li>
 							</ul></li>
 						<li sec:authorize="hasAnyAuthority('ADMIN', 'GEST_STOCK')"><a
-							th:href="@{/utilisateur/list}"> <i class="fa fa-users"></i> <span>Utilisateurs</span></a></li>
-						<li><a href="#" class="type-perso"> <i
-								class="fa fa-clipboard"></i> <span>Cours</span></a></li>
+							th:href="@{/utilisateur/list}"
+							th:attr="class=${link == 'utilisateur' ? 'active' : ''}"> <i
+								class="fa fa-users"></i> <span>Utilisateurs</span></a></li>
 						<li class="submenu"><a href="javascript:void(0);"
 							sec:authorize="hasAnyAuthority('ADMIN', 'ENSEIGNANT', 'GEST_STOCK')"><i
 								class="fa fa-cog"></i> <span> Paramètres </span> <span
 								class="menu-arrow"></span></a>
 							<ul>
-								<li><a th:href="@{/categorieProduit/list}">Categorie
+								<li><a th:href="@{/categorieProduit/list}"
+									th:attr="class=${link == 'produit-cat' ? 'active' : ''}">Categorie
 										produits</a></li>
 								<li><a href="form-input-groups.html">Categorie Materiel</a></li>
 								<li><a href="form-input-groups.html">Rayon</a></li>
