@@ -186,7 +186,7 @@
 								alt="img"><span> Dashboard</span> </a></li>
 						<li class="submenu"><a href="javascript:void(0);"><img
 								th:src="@{/img/icons/product.svg}" alt="img"><span>
-									Produit</span> <span class="menu-arrow"></span></a>
+									Produits</span> <span class="menu-arrow"></span></a>
 							<ul>
 								<li><a th:href="@{/produit/list}"
 									th:attr="class=${link == 'produit-list' ? 'active' : ''}">Liste</a></li>
@@ -211,6 +211,8 @@
 								<li><a th:href="@{/stock/materiel/historique-sortie}"
 									th:attr="class=${link == 'mv-materiel-sortie' ? 'active' : ''}">Journal
 										des sorties</a></li>
+								<li><a th:href="@{/incident/list}"
+									th:attr="class=${link == 'incident-list' ? 'active' : ''}">Incidents</a></li>
 							</ul></li>
 						<li sec:authorize="hasAnyAuthority('ADMIN', 'GEST_STOCK')"><a
 							th:href="@{/utilisateur/list}"
@@ -224,8 +226,7 @@
 								<li><a th:href="@{/categorieProduit/list}"
 									th:attr="class=${link == 'produit-cat' ? 'active' : ''}">Categorie
 										produits</a></li>
-								<li><a href="form-input-groups.html">Categorie Materiel</a></li>
-								<li><a href="form-input-groups.html">Rayon</a></li>
+								<li><a th:href="@{/categorieProduit/list}">Categorie Materiel</a></li>
 							</ul></li>
 					</ul>
 				</div>

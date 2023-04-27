@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fth.stock.dto.MaterielDto;
-import com.fth.stock.entity.CategorieMateriel;
 import com.fth.stock.entity.Materiel;
 import com.fth.stock.entity.User;
 import com.fth.stock.service.MaterielService;

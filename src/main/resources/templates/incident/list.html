@@ -6,15 +6,16 @@
 
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Utilisateurs</h4>
+				<h4>Incident</h4>
 				<h6>Liste</h6>
 			</div>
-			<div class="page-btn">
+			<div class="page-btn"
+				sec:authorize="hasAnyAuthority('ADMIN', 'ENSEIGNANT', 'GEST_STOCK')">
 				<!-- 				<a th:href="@{/view/categorieProduit/add}" class="btn btn-added"><img -->
 				<!-- 					th:src="@{/img/icons/plus.svg}" class="me-2" alt="img">Ajouter</a> -->
 				<a href="javascript:void(0);" class="btn btn-adds"
 					data-bs-toggle="modal" data-bs-target="#create"><i
-					class="fa fa-plus me-2"></i>Ajouter un utilisateur</a>
+					class="fa fa-plus me-2"></i>Ajouter un Incident</a>
 			</div>
 		</div>
 
@@ -27,11 +28,11 @@
 								<thead>
 									<tr>
 										<th></th>
-										<th>Username</th>
-										<th>Nom</th>
-										<th>Role</th>
-										<th>Date Creation</th>
-										<th></th>
+										<th>Cause</th>
+										<th>Materiel</th>
+										<th>Quantité</th>
+										<th>Utilisateur</th>
+										<th>Date</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -40,21 +41,22 @@
 									<!-- 										<td colspan="9">Aucune depense disponible actuellement -->
 									<!-- 											...</td> -->
 									<!-- 									</tr> -->
-									<tr th:each="d,i : ${listeUtil}">
+									<tr th:each="d,i : ${incidents}">
 										<td><span th:text="${i.count}"> 1 </span></td>
-										<td><span th:text="${d.username}"> </span></td>
-										<td><span th:text="${d.fullName}"> </span></td>
-										<td><ul class="row" th:each="role,i: ${d.roles}">
-												<li th:text="${role.name} + ','"></li>
-											</ul></td>
+										<td class="productimgname"><a href="javascript:void(0);"
+											class="product-img"> 
+										</a><span th:text="${d.cause}"> </span></td>
+										<td><span th:text="${d.quantite}"> </span></td>
+										<td><span th:text="${d.materiel.name}"> </span></td>
+										<td><span th:text="${d.user.fullName}"> </span></td>
 										<td><span
 											th:text="${#temporals.format(d.createAt, 'dd-MM-yyyy HH:mm')}">
 										</span></td>
 
-										<td><a th:href="@{'/utilisateur/delete/'+${d.id}}"><i
-												class="fa fa-trash"></i></a></td>
-										<td><a th:href="@{'/view/utilisateur/details/'+${d.id}}"><i
-												class="fa fa-edit"></i></a></td>
+										<td><a th:href="@{'/incident/delete/'+${d.id}}"
+											sec:authorize="hasAnyAuthority('ADMIN', 'ENSEIGNANT', 'GEST_STOCK')">
+												<img th:src="@{'/img/icons/delete.svg'}" alt="delete">
+										</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -72,45 +74,55 @@
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Creation utilisateur</h5>
+					<h5 class="modal-title">Creation d'un Incident</h5>
 					<button type="button" class="close" data-bs-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form role="form" method="post" th:action="@{/utilisateur/add}"
-						th:object="${user}">
+					<form role="form" method="post" th:action="@{/incident/add}"
+						th:object="${dto}" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-lg-6 col-sm-12 col-12">
 								<div class="form-group">
-									<label>Nom complet</label> <input type="text"
-										th:field="*{fullName}">
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-12 col-12">
-								<div class="form-group">
-									<label>Username</label> <input type="text"
-										th:field="*{username}">
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-12 col-12">
-								<div class="form-group">
-									<label>Telephone</label> <input type="number"
-										th:field="*{telephone}">
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-12 col-12">
-								<div class="form-group">
-									<label>Mot de passe</label> <input type="password"
-										th:field="*{password}">
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-12 col-12">
-								<div class="form-group">
-									<label>Role</label> <select type="text" th:field="*{roleId}">
-										<option th:each="val : ${listeRoles}" th:value="${val.id}"
+									<label>Materiel</label> <select type="text"
+										class="select select2-hidden-accessible"
+										th:field="*{materielId}">
+										<option th:each="val : ${materiels}" th:value="${val.id}"
 											th:text="${val.name}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6 col-sm-12 col-12">
+								<div class="form-group">
+									<label>Cause</label> <select
+										class="select select2-hidden-accessible" type="text"
+										th:field="*{cause}">
+										<option th:value="Cassé" th:text="${'Cassé'}"></option>
+										<option th:value="Egaré" th:text="${'Egaré'}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6 col-sm-12 col-12">
+								<div class="form-group">
+									<label>Description</label> <input type="text"
+										th:field="*{description}">
+								</div>
+							</div>
+							<div class="col-lg-6 col-sm-12 col-12">
+								<div class="form-group">
+									<label>Quantité</label> <input type="text"
+										th:field="*{quantite}">
+								</div>
+							</div>
+							<div class="col-lg-6 col-sm-12 col-12">
+								<div class="form-group">
+									<label>Concerné</label> <select type="text"
+										class="select select2-hidden-accessible"
+										th:field="*{userId}">
+										<option th:each="val : ${users}" th:value="${val.id}"
+											th:text="${val.fullName}"></option>
 									</select>
 								</div>
 							</div>
