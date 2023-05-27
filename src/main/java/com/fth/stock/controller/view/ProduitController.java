@@ -35,7 +35,10 @@ public class ProduitController {
 	@Autowired
 	private UserService userService;
 	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir")
-			+ "\\src\\main\\resources\\static\\img\\uploads";
+			+ "\\images";
+
+//	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir")
+//			+ "\\src\\main\\resources\\static\\img\\uploads";
 
 	@PostMapping("produit/add")
 	public String produitAdd(Model model, @ModelAttribute("produit") ProduitDto produitDto,

@@ -31,7 +31,10 @@ public class MaterielController {
 	@Autowired
 	private UserService userService;
 	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir")
-			+ "\\src\\main\\resources\\static\\img\\uploads";
+			+ "\\images";
+	
+//	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir")
+//			+ "\\src\\main\\resources\\static\\img\\uploads";
 
 	@PostMapping("materiel/add")
 	public String materielAdd(Model model, @ModelAttribute("materiel") MaterielDto materielDto,

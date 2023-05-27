@@ -8,7 +8,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.fth</groupId>
-	<artifactId>form</artifactId>
+	<artifactId>stock</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>stock</name>
 	<description> Application </description>
